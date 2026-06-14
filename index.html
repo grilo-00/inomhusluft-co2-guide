@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide: CO₂ och inomhusluft – vad nivåerna betyder</title>
+<meta name="description" content="En faktabaserad guide om koldioxid (CO₂) inomhus: vad ppm-nivåerna betyder, riktvärden, tecken på dålig ventilation och vad du kan göra. / A factual guide to indoor CO₂ levels and ventilation.">
+<style>
+  :root{--bg:#f4f7f8;--card:#fff;--ink:#13343b;--muted:#5b7178;--brand:#0e7c86;--brand-dark:#0a5e66;--accent:#e8f3f4;--line:#dde7e9;--good:#1f9d57;--ok:#7aa81e;--warn:#c9821a;--bad:#c0492f}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 18px 64px}
+  .topbar{display:flex;justify-content:flex-end;padding-top:10px}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+  .lang button{border:0;background:#fff;padding:6px 14px;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer}
+  .lang button.active{background:var(--brand);color:#fff}
+  header.hero{padding:14px 0 6px}
+  .hero h1{font-size:1.95rem;margin:0 0 8px;letter-spacing:-.01em}
+  .hero p{color:var(--muted);margin:0;font-size:1.08rem}
+  h2{font-size:1.3rem;margin:32px 0 10px}
+  h3{font-size:1.05rem;margin:22px 0 6px}
+  p{margin:0 0 12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-top:18px;box-shadow:0 1px 2px rgba(19,52,59,.04)}
+  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:.95rem}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
+  ul{margin:0 0 12px;padding-left:20px}
+  ul li{margin-bottom:6px}
+  .cta{margin-top:26px;background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;border-radius:14px;padding:22px 24px}
+  .cta h2{color:#fff;margin:0 0 6px}.cta p{margin:0 0 14px;opacity:.92}
+  .cta a{display:inline-block;background:#fff;color:var(--brand-dark);text-decoration:none;font-weight:700;padding:11px 20px;border-radius:10px}
+  .cta a:hover{background:#eafafa}
+  .tools{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .tools a{flex:1;min-width:220px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fbfdfd}
+  .tools a:hover{border-color:var(--brand)}
+  .tools .tt{font-weight:700;color:var(--brand-dark)}
+  .tools .td{font-size:.85rem;color:var(--muted)}
+  footer{margin-top:30px;font-size:.8rem;color:var(--muted);text-align:center}
+  footer a{color:var(--brand-dark)}
+  .note{font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="lang">
+      <button id="sv" class="active" onclick="setLang('sv')">SV</button>
+      <button id="en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1 data-t="title">CO₂ och inomhusluft – vad nivåerna betyder</h1>
+    <p data-t="lede">Koldioxid är ett av de enklaste sätten att mäta om ett rum är tillräckligt ventilerat. Här är vad ppm-nivåerna betyder och vad du kan göra.</p>
+  </header>
+
+  <section class="card">
+    <h2 data-t="h_why">Varför mäta CO₂?</h2>
+    <p data-t="p_why1">Vi andas ut koldioxid. I ett rum med för lite ventilation stiger CO₂-halten i takt med antalet personer och tiden – och följer i praktiken hur "instängd" luften känns. Därför används CO₂ ofta som en indikator på om ventilationen räcker till, snarare än för att koldioxiden i sig är farlig vid dessa nivåer.</p>
+    <p class="note" data-t="p_why2">Utomhusluft ligger idag på runt 420 ppm. Inomhus är målet att hålla halten nära utomhusnivån.</p>
+  </section>
+
+  <section class="card">
+    <h2 data-t="h_table">Riktvärden för CO₂ inomhus</h2>
+    <table>
+      <thead><tr><th data-t="c_level">Nivå (ppm)</th><th data-t="c_mean">Vad det brukar betyda</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p class="note" data-t="p_table">I Sverige används ofta ca 1 000 ppm som ett riktvärde: överskrids det återkommande är det ett tecken på att ventilationen kan behöva ses över. Riktvärden varierar mellan källor och sammanhang.</p>
+  </section>
+
+  <section class="card">
+    <h2 data-t="h_signs">Tecken på dålig ventilation</h2>
+    <ul id="signs"></ul>
+  </section>
+
+  <section class="card">
+    <h2 data-t="h_do">Vad du kan göra</h2>
+    <ul id="dolist"></ul>
+    <h3 data-t="h_beyond">Mer än bara CO₂</h3>
+    <p data-t="p_beyond">CO₂ är en bra indikator, men bra inomhusluft handlar också om fukt (håll relativ luftfuktighet ungefär 30–60 %), partiklar, radon och matos. Ett balanserat från- och tilluftssystem med värmeåtervinning (FTX) hanterar flera av dessa samtidigt och återvinner värme.</p>
+  </section>
+
+  <section class="card">
+    <h2 data-t="h_tools">Räkna på din ventilation</h2>
+    <div class="tools">
+      <a href="https://grilo-00.github.io/ventilationskalkylator/" target="_blank" rel="noopener">
+        <div class="tt" data-t="tool1t">Ventilationskalkylator →</div>
+        <div class="td" data-t="tool1d">Uppskatta luftflöde och luftomsättning enligt BBR.</div>
+      </a>
+      <a href="https://grilo-00.github.io/ftx-konfigurator/" target="_blank" rel="noopener">
+        <div class="tt" data-t="tool2t">FTX-konfigurator →</div>
+        <div class="td" data-t="tool2d">Hitta rätt systemtyp och se en kostnadsuppskattning.</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2 data-t="cta_h">Osäker på din ventilation?</h2>
+    <p data-t="cta_p">Pureflow mäter, projekterar och installerar ventilation för villa, BRF, kontor och industri – med mätprotokoll och analys före och efter.</p>
+    <a href="https://pureflow.nu/" target="_blank" rel="noopener" data-t="cta_a">Kontakta Pureflow →</a>
+  </section>
+
+  <footer>
+    <span data-t="foot">Guiden är allmän information och inte en medicinsk eller arbetsmiljörättslig bedömning. Riktvärden varierar mellan källor.</span>
+    · <span data-t="foot2">Framtagen med data från</span> <a href="https://pureflow.nu/" target="_blank" rel="noopener">pureflow.nu</a>.
+  </footer>
+</div>
+
+<script>
+const ROWS=[
+ {c:"var(--good)",l:"≈ 420",sv:"Utomhusnivå – referens.",en:"Outdoor level – reference."},
+ {c:"var(--good)",l:"< 800",sv:"Frisk, väl ventilerad luft.",en:"Fresh, well-ventilated air."},
+ {c:"var(--ok)",l:"800–1000",sv:"Acceptabelt. Ventilationen följer i stort sett behovet.",en:"Acceptable. Ventilation roughly matches demand."},
+ {c:"var(--warn)",l:"1000–1400",sv:"Lite instängt. Ofta märkbart sämre koncentration.",en:"A bit stuffy. Concentration often noticeably reduced."},
+ {c:"var(--warn)",l:"1400–2000",sv:"Dålig luft. Trötthet och huvudvärk är vanligt.",en:"Poor air. Drowsiness and headaches are common."},
+ {c:"var(--bad)",l:"> 2000",sv:"Mycket dålig luft. Ventilationen räcker tydligt inte till.",en:"Very poor air. Ventilation is clearly insufficient."}
+];
+const T={
+ sv:{title:"CO₂ och inomhusluft – vad nivåerna betyder",lede:"Koldioxid är ett av de enklaste sätten att mäta om ett rum är tillräckligt ventilerat. Här är vad ppm-nivåerna betyder och vad du kan göra.",
+  h_why:"Varför mäta CO₂?",p_why1:"Vi andas ut koldioxid. I ett rum med för lite ventilation stiger CO₂-halten i takt med antalet personer och tiden – och följer i praktiken hur \"instängd\" luften känns. Därför används CO₂ ofta som en indikator på om ventilationen räcker till, snarare än för att koldioxiden i sig är farlig vid dessa nivåer.",p_why2:"Utomhusluft ligger idag på runt 420 ppm. Inomhus är målet att hålla halten nära utomhusnivån.",
+  h_table:"Riktvärden för CO₂ inomhus",c_level:"Nivå (ppm)",c_mean:"Vad det brukar betyda",p_table:"I Sverige används ofta ca 1 000 ppm som ett riktvärde: överskrids det återkommande är det ett tecken på att ventilationen kan behöva ses över. Riktvärden varierar mellan källor och sammanhang.",
+  h_signs:"Tecken på dålig ventilation",h_do:"Vad du kan göra",h_beyond:"Mer än bara CO₂",p_beyond:"CO₂ är en bra indikator, men bra inomhusluft handlar också om fukt (håll relativ luftfuktighet ungefär 30–60 %), partiklar, radon och matos. Ett balanserat från- och tilluftssystem med värmeåtervinning (FTX) hanterar flera av dessa samtidigt och återvinner värme.",
+  h_tools:"Räkna på din ventilation",tool1t:"Ventilationskalkylator →",tool1d:"Uppskatta luftflöde och luftomsättning enligt BBR.",tool2t:"FTX-konfigurator →",tool2d:"Hitta rätt systemtyp och se en kostnadsuppskattning.",
+  cta_h:"Osäker på din ventilation?",cta_p:"Pureflow mäter, projekterar och installerar ventilation för villa, BRF, kontor och industri – med mätprotokoll och analys före och efter.",cta_a:"Kontakta Pureflow →",
+  foot:"Guiden är allmän information och inte en medicinsk eller arbetsmiljörättslig bedömning. Riktvärden varierar mellan källor.",foot2:"Framtagen med data från",
+  signs:["Luften känns instängd eller \"tung\", särskilt på morgonen i sovrum.","Imma på fönster och fukt i våtrum som sitter kvar länge.","Lukter (matos, instängdhet) som dröjer sig kvar mellan rum.","Trötthet eller huvudvärk i möteslokaler med många personer.","Mögellukt eller synlig fukt – kan tyda på både för lite ventilation och fuktproblem."],
+  dolist:["Vädra snabbt och med korsdrag – effektivare än ett fönster på glänt länge.","Se till att tilluftsdon och frånluftsventiler inte är igensatta eller övertejpade.","Rengör eller byt filter i ventilationsaggregat regelbundet.","Mät med en enkel CO₂-mätare i sovrum och möteslokaler för att se mönster.","Vid återkommande höga värden: låt en fackman mäta flöden och injustera systemet."]},
+ en:{title:"Indoor CO₂ and air quality – what the levels mean",lede:"Carbon dioxide is one of the simplest ways to tell whether a room is adequately ventilated. Here's what the ppm levels mean and what you can do.",
+  h_why:"Why measure CO₂?",p_why1:"We exhale carbon dioxide. In a room with too little ventilation, CO₂ rises with the number of people and time – and in practice tracks how \"stuffy\" the air feels. That's why CO₂ is often used as an indicator of whether ventilation is sufficient, rather than because the CO₂ itself is harmful at these levels.",p_why2:"Outdoor air is around 420 ppm today. Indoors, the goal is to keep levels close to the outdoor value.",
+  h_table:"Reference values for indoor CO₂",c_level:"Level (ppm)",c_mean:"What it usually means",p_table:"In Sweden around 1,000 ppm is often used as a reference: if it's repeatedly exceeded, that's a sign the ventilation may need review. Reference values vary between sources and contexts.",
+  h_signs:"Signs of poor ventilation",h_do:"What you can do",h_beyond:"More than just CO₂",p_beyond:"CO₂ is a good indicator, but good indoor air is also about humidity (keep relative humidity around 30–60%), particles, radon and cooking odours. A balanced supply-and-exhaust system with heat recovery (FTX) handles several of these at once and recovers heat.",
+  h_tools:"Calculate your ventilation",tool1t:"Ventilation calculator →",tool1d:"Estimate airflow and air change rate per BBR.",tool2t:"FTX configurator →",tool2d:"Find the right system type and see a cost estimate.",
+  cta_h:"Unsure about your ventilation?",cta_p:"Pureflow measures, designs and installs ventilation for homes, housing associations, offices and industry – with measurement and analysis before and after.",cta_a:"Contact Pureflow →",
+  foot:"This guide is general information, not a medical or occupational-health assessment. Reference values vary between sources.",foot2:"Built with data from",
+  signs:["The air feels stuffy or \"heavy\", especially in bedrooms in the morning.","Condensation on windows and bathroom moisture that lingers.","Odours (cooking, stuffiness) that linger and travel between rooms.","Drowsiness or headaches in meeting rooms with many people.","Musty smell or visible damp – can indicate both poor ventilation and moisture problems."],
+  dolist:["Air out quickly with cross-draught – more effective than one window ajar for a long time.","Make sure supply and exhaust vents aren't blocked or taped over.","Clean or replace filters in ventilation units regularly.","Measure with a simple CO₂ meter in bedrooms and meeting rooms to spot patterns.","If values are repeatedly high: have a professional measure airflows and balance the system."]}
+};
+let lang="sv";
+function setLang(l){lang=l;document.documentElement.lang=l;
+  document.getElementById("sv").classList.toggle("active",l==="sv");
+  document.getElementById("en").classList.toggle("active",l==="en");
+  document.querySelectorAll("[data-t]").forEach(el=>{const k=el.getAttribute("data-t");if(typeof T[l][k]==="string")el.textContent=T[l][k];});
+  document.getElementById("tbody").innerHTML=ROWS.map(r=>`<tr><td><span class="dot" style="background:${r.c}"></span>${r.l}</td><td>${r[l]}</td></tr>`).join("");
+  document.getElementById("signs").innerHTML=T[l].signs.map(s=>`<li>${s}</li>`).join("");
+  document.getElementById("dolist").innerHTML=T[l].dolist.map(s=>`<li>${s}</li>`).join("");
+}
+setLang("sv");
+</script>
+</body>
+</html>
